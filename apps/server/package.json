@@ -1,0 +1,16 @@
+{
+	"name": "@repo/server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.ts",
+	"scripts": {
+		"dev": "tsx watch --clear-screen=false index.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"socket.io": "^4.7.5",
+		"tsx": "^4.12.0"
+	}
+}
