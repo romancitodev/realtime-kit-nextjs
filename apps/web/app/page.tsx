@@ -1,9 +1,8 @@
-import { Socket } from "./socket";
+import { Socket } from "@/components/socket";
 
 export default function Page(): JSX.Element {
 	return (
 		<main>
-			Page:
 			<Socket />
 		</main>
 	);

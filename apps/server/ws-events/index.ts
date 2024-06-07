@@ -4,6 +4,7 @@ export const connect = (socket: Socket) => {
 	console.log(`✅ New client connected: ${socket.id}`);
 
 	socket.on("disconnect", () => {
+		socket.broadcast.emit("cast:disconnect", socket.id);
 		console.log("❌ A client disconnected...");
 	});
 
