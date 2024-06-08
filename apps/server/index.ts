@@ -1,12 +1,16 @@
 import { createServer } from "node:http";
-import { Server } from "socket.io";
+import { Server as ServerIO, type Socket as SocketIO } from "socket.io";
+import type { Responses, Events } from "@repo/types/socket";
 import * as e from "./ws-events";
 
 const hostname = "localhost";
 const port = 4000;
 
+export type Socket = SocketIO<Events, Responses>;
+export type Server = ServerIO<Events, Responses>;
+
 const http = createServer();
-const io = new Server(http, {
+export const io: Server = new ServerIO(http, {
 	cors: {
 		origin: "http://localhost:3000",
 	},

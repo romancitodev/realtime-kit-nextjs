@@ -1,21 +1,21 @@
-import type { Socket } from "socket.io";
-
+import type { Socket } from "..";
 export const connect = (socket: Socket) => {
-	console.log(`✅ New client connected: ${socket.id}`);
+	console.log(`✅ client [${socket.id}] connected.`);
+	socket.broadcast.emit("new:client", socket.id);
 
 	socket.on("disconnect", () => {
-		socket.broadcast.emit("cast:disconnect", socket.id);
-		console.log("❌ A client disconnected...");
+		socket.broadcast.emit("off:client", socket.id);
+		console.log(`❌ client [${socket.id}] disconnected...`);
 	});
 
 	// socket events;
-	socket.on("message", (msg) => {
-		socket.emit("new-message", msg);
+	socket.on("send:all:message", (msg: string) => {
+		console.log("📡 Broadcasting message...");
+		socket.broadcast.emit("new:message", msg, Date.now());
 	});
 
-	socket.on("broadcast-msg", (msg) => {
-		console.log("📡 Emitting signal...");
-		socket.broadcast.emit("new-message", msg);
+	socket.on("send:all:connect", (id: string) => {
+		socket.broadcast.emit("new:client", id);
 	});
 };
 

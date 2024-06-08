@@ -1,0 +1,10 @@
+{
+	"name": "@repo/types",
+	"version": "0.0.0",
+	"exports": {
+		"./*": "./src/*.d.ts"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC"
+}

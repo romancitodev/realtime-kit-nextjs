@@ -1,20 +1,55 @@
 "use client";
 
+import { useIsClient } from "@/hooks/use-client";
 import { useSocket } from "@/hooks/use-socket";
-import { configure } from "@/utils/socket";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
-export function Socket() {
-	const { socket, ready } = useSocket();
+type Message = {
+	message: string;
+	id: number;
+};
+
+export function _Socket() {
+	const ready = useIsClient();
+	const { socket } = useSocket();
+	const [messages, setMessages] = useState<Message[]>([]);
 
 	useEffect(() => {
-		if (ready && socket) {
-			configure(socket);
-			socket.emit("broadcast-msg", "Socket hi");
+		if (ready) {
+			socket.on("new:message", (msg, id) =>
+				setMessages((msgs) => [
+					...msgs,
+					{
+						message: msg,
+						id,
+					},
+				]),
+			);
+			if (socket.id) {
+				socket.emit("send:message", "testing local messages");
+				socket.emit("send:all:connect", socket.id);
+			}
 		}
 	}, [socket, ready]);
 
-	if (!ready || !socket) return <main>lo</main>;
-
-	return <main>hello {socket.id}</main>;
+	return (
+		<main>
+			hello {socket.id}
+			Messages:
+			<li>
+				{messages.map(({ message, id }) => (
+					<ul key={id}>{message}</ul>
+				))}
+			</li>
+		</main>
+	);
 }
+
+export const Socket = dynamic(
+	() => import("@/components/socket").then((m) => m._Socket),
+	{
+		ssr: false,
+		loading: () => <main>hello A Messages: None</main>,
+	},
+);
