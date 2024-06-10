@@ -8,14 +8,18 @@ export const connect = (socket: Socket) => {
 		console.log(`❌ client [${socket.id}] disconnected...`);
 	});
 
+	socket.on("send:message", (msg: string) => {
+		socket.emit("log:message", msg, Date.now());
+	});
+
 	// socket events;
 	socket.on("send:all:message", (msg: string) => {
 		console.log("📡 Broadcasting message...");
 		socket.broadcast.emit("new:message", msg, Date.now());
 	});
 
-	socket.on("send:all:connect", (id: string) => {
-		socket.broadcast.emit("new:client", id);
+	socket.on("send:all:connect", () => {
+		socket.broadcast.emit("new:client", socket.id);
 	});
 };
 

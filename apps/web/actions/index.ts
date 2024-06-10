@@ -1,4 +1,4 @@
-import type { Socket } from "@/app/socket";
+import type { Socket } from "@/utils/socket";
 
 const sendMessage = async (data: FormData, socket: Socket) => {
 	const message = data.get("message") as string;

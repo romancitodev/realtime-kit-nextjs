@@ -1,24 +1,25 @@
 "use client";
 
-import type { Socket } from "@/app/socket";
-import { useIsClient } from "@/hooks/use-client";
-import { configure } from "@/utils/socket";
+import type { Socket } from "@/utils/socket";
+import { connect } from "@/utils/socket";
 import type React from "react";
-import { createContext, useContext, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
+import {
+	createContext,
+	useCallback,
+	useContext,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from "react";
 
 type Context = {
-	socket: Socket;
+	socket: Socket | null;
 	ready: boolean;
 };
 
-const socket: Socket = io("http://localhost:4000", {
-	transports: ["websocket"],
-	autoConnect: false,
-});
-
 const SocketContext = createContext<Context>({
-	socket,
+	socket: null,
 	ready: false,
 });
 
@@ -28,29 +29,69 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
-	const socketRef = useRef<Socket | null>(null);
-	const ready = useIsClient();
+	const [socket, loadSocket] = useState<Socket | null>(null);
+	const loading = useRef(false);
+	const [ready, setReady] = useState(false);
 
-	const getSocket = () => {
-		if (socketRef.current) return socketRef.current;
-		socketRef.current = socket;
-		return socket;
-	};
+	const load = useCallback(() => {
+		connect().then((s) => {
+			loadSocket(s);
+			setReady(true);
+		});
+	}, []);
 
-	const _socket = getSocket();
-
+	// Initialize the socket
 	useEffect(() => {
-		configure(socket);
-		if (ready) socket.connect();
+		if (!socket && !loading.current) {
+			loading.current = true;
+			load();
+		}
+	}, [socket, load]);
+
+	// In case the socket disconnects, just drop it.
+	useEffect(() => {
+		if (!socket) return;
+
+		socket.on("disconnect", () => loadSocket(null));
+
 		return () => {
-			void socket.removeAllListeners();
-			void socket.close();
+			socket.disconnect();
 		};
-	}, [ready]);
+	}, [socket]);
 
 	return (
-		<SocketContext.Provider value={{ ready, socket: _socket }}>
+		<SocketContext.Provider
+			value={useMemo(() => ({ ready, socket }), [socket, ready])}
+		>
 			{children}
 		</SocketContext.Provider>
 	);
 };
+
+// export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
+// 	const socketRef = useRef<Socket | null>(null);
+// 	const ready = useIsClient();
+
+// 	const getSocket = () => {
+// 		if (socketRef.current) return socketRef.current;
+// 		socketRef.current = socket;
+// 		return socket;
+// 	};
+
+// 	const _socket = getSocket();
+
+// 	useEffect(() => {
+// 		configure(socket);
+// 		if (ready) socket.connect();
+// 		return () => {
+// 			void socket.removeAllListeners();
+// 			void socket.close();
+// 		};
+// 	}, [ready]);
+
+// 	return (
+// 		<SocketContext.Provider value={{ ready, socket: _socket }}>
+// 			{children}
+// 		</SocketContext.Provider>
+// 	);
+// };

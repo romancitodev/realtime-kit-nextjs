@@ -1,5 +1,6 @@
 export declare interface Responses {
 	"new:client": (id: string) => void;
+	"log:message": (msg: string, id: number) => void;
 	"new:message": (msg: string, id: number) => void;
 	"off:client": (id: string) => void;
 }
