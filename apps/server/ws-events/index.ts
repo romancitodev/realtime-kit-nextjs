@@ -18,6 +18,10 @@ export const connect = (socket: Socket) => {
 		socket.broadcast.emit("new:message", msg, Date.now());
 	});
 
+	socket.on("send:all:notice", (msg: string) => {
+		socket.broadcast.emit("new:notice", msg);
+	});
+
 	socket.on("send:all:connect", () => {
 		socket.broadcast.emit("new:client", socket.id);
 	});

@@ -1,7 +1,10 @@
-import { SocketProvider } from "@/context/socket";
 import "./globals.css";
+import "@repo/primitives/styles.css";
+import { SocketProvider } from "@/context/socket";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Handler } from "@/components/handler";
+import { cn } from "@repo/primitives/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +20,11 @@ export default function RootLayout({
 }): JSX.Element {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<SocketProvider>{children}</SocketProvider>
+			<body className={cn(inter.className, "dark")}>
+				<SocketProvider>
+					<Handler />
+					{children}
+				</SocketProvider>
 			</body>
 		</html>
 	);

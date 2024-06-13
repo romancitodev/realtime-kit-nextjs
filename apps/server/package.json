@@ -15,5 +15,6 @@
 	},
 	"devDependencies": {
 		"@repo/types": "workspace:*"
-	}
+	},
+	"packageManager": "pnpm@9.1.2"
 }

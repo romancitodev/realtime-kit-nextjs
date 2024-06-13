@@ -1,0 +1,20 @@
+{
+	"name": "@repo/db",
+	"version": "1.0.0",
+	"exports": {
+		".": "./index.ts"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@edgedb/auth-nextjs": "^0.3.1",
+		"edgedb": "^1.5.7"
+	},
+	"devDependencies": {
+		"@edgedb/generate": "^0.5.3"
+	}
+}

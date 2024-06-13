@@ -1,40 +1,24 @@
 "use client";
 
-import { oneShot } from "@/hooks/on-client";
 import { useSocket } from "@/hooks/use-socket";
-import { useState } from "react";
-
-type Message = {
-	message: string;
-	id: number;
-};
+import { store } from "@/store/messages";
 
 export function Socket() {
 	const { ready, socket } = useSocket();
-	const [messages, setMessages] = useState<Message[]>([]);
+	const messages = store.chats((s) => s.messages);
 
-	oneShot(() => {
-		if (!socket) return;
+	if (!socket) return <main>Disconnected</main>;
 
-		socket.on("new:message", (msg, id) =>
-			setMessages((msgs) => [...msgs, { message: msg, id }]),
-		);
-		socket.on("log:message", (msg, id) => {
-			console.log(`Message from my own: ${msg} [${id}]`);
-		});
-		socket.emit("send:message", "testing local messages");
-	}, ready);
+	if (!ready) return <main>Loading client...</main>;
 
-	return !ready || !socket ? (
-		<main>Disconnected</main>
-	) : (
-		<main>
+	return (
+		<main className="">
 			hello {socket.id}
 			<br />
 			Messages:
 			<li>
-				{messages.map(({ message, id }) => (
-					<ul key={id}>{message}</ul>
+				{messages.map(({ content, id }) => (
+					<ul key={id}>{content}</ul>
 				))}
 			</li>
 		</main>

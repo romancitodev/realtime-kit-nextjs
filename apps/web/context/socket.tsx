@@ -67,31 +67,3 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 		</SocketContext.Provider>
 	);
 };
-
-// export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
-// 	const socketRef = useRef<Socket | null>(null);
-// 	const ready = useIsClient();
-
-// 	const getSocket = () => {
-// 		if (socketRef.current) return socketRef.current;
-// 		socketRef.current = socket;
-// 		return socket;
-// 	};
-
-// 	const _socket = getSocket();
-
-// 	useEffect(() => {
-// 		configure(socket);
-// 		if (ready) socket.connect();
-// 		return () => {
-// 			void socket.removeAllListeners();
-// 			void socket.close();
-// 		};
-// 	}, [ready]);
-
-// 	return (
-// 		<SocketContext.Provider value={{ ready, socket: _socket }}>
-// 			{children}
-// 		</SocketContext.Provider>
-// 	);
-// };
