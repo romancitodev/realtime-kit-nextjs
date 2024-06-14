@@ -6,7 +6,6 @@ import type React from "react";
 import {
 	createContext,
 	useCallback,
-	useContext,
 	useEffect,
 	useMemo,
 	useRef,
@@ -18,15 +17,10 @@ type Context = {
 	ready: boolean;
 };
 
-const SocketContext = createContext<Context>({
+export const SocketContext = createContext<Context>({
 	socket: null,
 	ready: false,
 });
-
-export const useSocket = () => {
-	const ctx = useContext(SocketContext);
-	return ctx;
-};
 
 export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 	const [socket, loadSocket] = useState<Socket | null>(null);
@@ -52,10 +46,13 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
 		if (!socket) return;
 
-		socket.on("disconnect", () => loadSocket(null));
+		const unload = () => loadSocket(null);
+
+		socket.on("disconnect", unload);
 
 		return () => {
 			socket.disconnect();
+			socket.off("disconnect", unload);
 		};
 	}, [socket]);
 

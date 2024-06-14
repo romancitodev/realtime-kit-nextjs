@@ -2,13 +2,11 @@ import { createClient } from "edgedb";
 export { default as e } from "./dbschema/edgeql-js";
 import createAuth from "@edgedb/auth-nextjs/app";
 
-const token: string = "";
-
 export const client = createClient({
 	instanceName: "repo-db",
 	tlsSecurity: "insecure",
 }).withGlobals({
-	"ext::auth::client_token": token,
+	"ext::auth::AuthConfig::auth_signing_key": process.env.auth_signin_key,
 });
 
 export const auth = createAuth(client, {

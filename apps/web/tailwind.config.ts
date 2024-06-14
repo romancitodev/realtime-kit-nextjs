@@ -1,9 +1,10 @@
 // tailwind config is required for editor support
 
 import type { Config } from "tailwindcss";
-import ui from "@repo/ui/tailwind.config.ts";
+import ui from "@repo/atoms/tailwind.config.ts";
 
-const config: Pick<Config, "content" | "presets"> = {
+const config: Pick<Config, "content" | "presets" | "darkMode"> = {
+	darkMode: "class",
 	content: ["./app/**/*.tsx"],
 	presets: [ui],
 };

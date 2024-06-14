@@ -8,13 +8,16 @@
 		"start": "NODE_ENV=production tsx server.ts"
 	},
 	"dependencies": {
-		"@repo/ui": "workspace:*",
-		"@repo/primitives": "workspace:*",
+		"@hookform/resolvers": "^3.6.0",
+		"@repo/atoms": "workspace:*",
 		"next": "^14.2.0",
+		"next-themes": "^0.3.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"react-hook-form": "^7.51.5",
 		"socket.io-client": "^4.7.5",
 		"tsx": "^4.12.0",
+		"zod": "^3.23.8",
 		"zustand": "^4.5.2"
 	},
 	"devDependencies": {

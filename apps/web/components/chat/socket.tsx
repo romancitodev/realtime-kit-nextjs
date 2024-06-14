@@ -12,7 +12,7 @@ export function Socket() {
 	if (!ready) return <main>Loading client...</main>;
 
 	return (
-		<main className="">
+		<main>
 			hello {socket.id}
 			<br />
 			Messages:

@@ -1,10 +1,12 @@
 import "./globals.css";
-import "@repo/primitives/styles.css";
+import "@repo/atoms/styles.css";
 import { SocketProvider } from "@/context/socket";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Handler } from "@/components/handler";
-import { cn } from "@repo/primitives/utils";
+import { Handler } from "@/components/helpers/handler";
+import { ChangeTheme } from "@/components/theme/theme";
+import { ThemeProvider } from "next-themes";
+import { cn } from "@repo/atoms/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +21,17 @@ export default function RootLayout({
 	children: React.ReactNode;
 }): JSX.Element {
 	return (
-		<html lang="en">
-			<body className={cn(inter.className, "dark")}>
-				<SocketProvider>
-					<Handler />
-					{children}
-				</SocketProvider>
+		<html lang="en" suppressHydrationWarning>
+			<body
+				className={cn(inter.className, "bg-background dark:bg-neutral-950")}
+			>
+				<ThemeProvider attribute="class" defaultTheme="dark" storageKey="theme">
+					<SocketProvider>
+						<Handler />
+						<ChangeTheme />
+						{children}
+					</SocketProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

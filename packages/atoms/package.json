@@ -1,5 +1,5 @@
 {
-	"name": "@repo/primitives",
+	"name": "@repo/atoms",
 	"version": "0.0.0",
 	"private": true,
 	"exports": {

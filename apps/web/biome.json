@@ -1,6 +1,8 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
-    "overrides": [{
-        "include": ["@repo/biome-config/**"]
-    }]
+	"$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
+	"overrides": [
+		{
+			"include": ["@repo/biome-config/"]
+		}
+	]
 }

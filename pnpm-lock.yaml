@@ -33,27 +33,36 @@ importers:
 
   apps/web:
     dependencies:
-      '@repo/primitives':
+      '@hookform/resolvers':
+        specifier: ^3.6.0
+        version: 3.6.0(react-hook-form@7.51.5(react@18.3.1))
+      '@repo/atoms':
         specifier: workspace:*
-        version: link:../../packages/primitives
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/atoms
       next:
         specifier: ^14.2.0
         version: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next-themes:
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.51.5
+        version: 7.51.5(react@18.3.1)
       socket.io-client:
         specifier: ^4.7.5
         version: 4.7.5
       tsx:
         specifier: ^4.12.0
         version: 4.15.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
       zustand:
         specifier: ^4.5.2
         version: 4.5.2(@types/react@18.3.3)(react@18.3.1)
@@ -92,29 +101,7 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
-  packages/biome-config:
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 1.7.3
-        version: 1.7.3
-      typescript:
-        specifier: ^5.3.3
-        version: 5.4.5
-
-  packages/db:
-    dependencies:
-      '@edgedb/auth-nextjs':
-        specifier: ^0.3.1
-        version: 0.3.1(edgedb@1.5.7)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
-      edgedb:
-        specifier: ^1.5.7
-        version: 1.5.7
-    devDependencies:
-      '@edgedb/generate':
-        specifier: ^0.5.3
-        version: 0.5.3(edgedb@1.5.7)
-
-  packages/primitives:
+  packages/atoms:
     dependencies:
       '@hookform/resolvers':
         specifier: ^3.6.0
@@ -184,6 +171,28 @@ importers:
         specifier: ^5.3.3
         version: 5.4.5
 
+  packages/biome-config:
+    devDependencies:
+      '@biomejs/biome':
+        specifier: 1.7.3
+        version: 1.7.3
+      typescript:
+        specifier: ^5.3.3
+        version: 5.4.5
+
+  packages/db:
+    dependencies:
+      '@edgedb/auth-nextjs':
+        specifier: ^0.3.1
+        version: 0.3.1(edgedb@1.5.7)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+      edgedb:
+        specifier: ^1.5.7
+        version: 1.5.7
+    devDependencies:
+      '@edgedb/generate':
+        specifier: ^0.5.3
+        version: 0.5.3(edgedb@1.5.7)
+
   packages/tw-config:
     devDependencies:
       '@repo/typescript-config':
@@ -196,55 +205,6 @@ importers:
   packages/types: {}
 
   packages/typescript-config: {}
-
-  packages/ui:
-    dependencies:
-      '@hookform/resolvers':
-        specifier: ^3.6.0
-        version: 3.6.0(react-hook-form@7.51.5(react@18.3.1))
-      '@repo/primitives':
-        specifier: workspace:*
-        version: link:../primitives
-      '@repo/tw-config':
-        specifier: workspace:*
-        version: link:../tw-config
-      react-hook-form:
-        specifier: ^7.51.5
-        version: 7.51.5(react@18.3.1)
-      zod:
-        specifier: ^3.23.8
-        version: 3.23.8
-    devDependencies:
-      '@repo/biome-config':
-        specifier: workspace:*
-        version: link:../biome-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/node':
-        specifier: ^20.11.24
-        version: 20.14.2
-      '@types/react':
-        specifier: ^18.2.61
-        version: 18.3.3
-      '@types/react-dom':
-        specifier: ^18.2.19
-        version: 18.3.0
-      autoprefixer:
-        specifier: ^10.4.19
-        version: 10.4.19(postcss@8.4.38)
-      postcss:
-        specifier: ^8.4.38
-        version: 8.4.38
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      tailwindcss:
-        specifier: 3.4.3
-        version: 3.4.3(ts-node@10.9.2)
-      typescript:
-        specifier: ^5.3.3
-        version: 5.4.5
 
 packages:
 
@@ -1548,6 +1508,12 @@ packages:
   netmask@2.0.2:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
+
+  next-themes@0.3.0:
+    resolution: {integrity: sha512-/QHIrsYpd6Kfk7xakK4svpDI5mmXP0gfvCoJdGpZQ2TOrQZmsW0QxjaiLn8wbIKjtm4BTSqLoix4lxYYOnLJ/w==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18
+      react-dom: ^16.8 || ^17 || ^18
 
   next@14.2.4:
     resolution: {integrity: sha512-R8/V7vugY+822rsQGQCjoLhMuC9oFj9SOi4Cl4b2wjDrseD0LRZ10W7R6Czo4w9ZznVSshKjuIomsRjvm9EKJQ==}
@@ -3519,6 +3485,11 @@ snapshots:
   neo-async@2.6.2: {}
 
   netmask@2.0.2: {}
+
+  next-themes@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
