@@ -105,6 +105,7 @@ export function Form() {
 				<Button type="submit" disabled={pending}>
 					Submit
 				</Button>
+				{status && <pre>{status}</pre>}
 			</form>
 		</_Form>
 	);

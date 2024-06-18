@@ -8,6 +8,13 @@
       "when": 1718566266206,
       "tag": "0000_oval_kulan_gath",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1718743998834,
+      "tag": "0001_freezing_the_fallen",
+      "breakpoints": true
     }
   ]
 }

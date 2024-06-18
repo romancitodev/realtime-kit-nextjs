@@ -1,7 +1,6 @@
 "use server";
 
-import { db, f } from "@repo/db";
-import { users } from "@repo/db/schemas";
+import { db, f, schema } from "@/drizzle";
 import { Register, type RegisterSchema } from "./types";
 
 export async function register(rawData: RegisterSchema) {
@@ -11,23 +10,28 @@ export async function register(rawData: RegisterSchema) {
 
 	const [user] = await db
 		.select({
-			email: users.email,
-			name: users.name,
+			email: schema.users.email,
+			name: schema.users.name,
 		})
-		.from(users)
-		.where(f.and(f.eq(users.email, data.email), f.eq(users.name, data.user)))
+		.from(schema.users)
+		.where(
+			f.or(
+				f.eq(schema.users.email, data.email),
+				f.eq(schema.users.name, data.user),
+			),
+		)
 		.limit(1);
 
 	if (user) return { status: 400 };
 
 	const newUser = await db
-		.insert(users)
+		.insert(schema.users)
 		.values({
 			email: data.email,
 			name: data.user,
 			password: data.password,
 		})
-		.returning({ id: users.id });
+		.returning({ id: schema.users.id });
 
 	return { status: 200, data: newUser[0]?.id };
 }

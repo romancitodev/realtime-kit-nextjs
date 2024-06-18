@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@auth/drizzle-adapter": "^1.2.0",
 		"@hookform/resolvers": "^3.6.0",
+		"@libsql/client": "^0.6.2",
 		"@repo/atoms": "workspace:*",
 		"next": "^14.2.0",
 		"next-auth": "5.0.0-beta.19",
