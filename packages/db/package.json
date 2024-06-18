@@ -1,20 +1,21 @@
 {
 	"name": "@repo/db",
 	"version": "1.0.0",
-	"exports": {
-		".": "./index.ts"
-	},
+	"type": "module",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"db:generate": "pnpm drizzle-kit generate"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"dependencies": {
-		"@edgedb/auth-nextjs": "^0.3.1",
-		"edgedb": "^1.5.7"
-	},
 	"devDependencies": {
-		"@edgedb/generate": "^0.5.3"
+		"@repo/typescript-config": "workspace:*",
+		"@auth/core": "^0.32.0",
+		"drizzle-kit": "^0.22.7"
+	},
+	"dependencies": {
+		"@libsql/client": "^0.6.2",
+		"dotenv": "^16.4.5",
+		"drizzle-orm": "latest"
 	}
 }

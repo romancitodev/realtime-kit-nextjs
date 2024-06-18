@@ -1,6 +1,6 @@
 "use client";
 
-import { actions } from "@/actions";
+import { send } from "@/actions/messages";
 import { useSocket } from "@/hooks/use-socket";
 import { store } from "@/store/messages";
 import { Input } from "@repo/atoms/input";
@@ -28,7 +28,7 @@ export default function Page() {
 					className="w-full h-full flex items-start gap-x-5"
 					ref={formRef}
 					action={(data) => {
-						actions.messages.send(data, socket).then((msg) => addMessage(msg));
+						send(data, socket).then((msg) => addMessage(msg));
 						if (formRef.current) formRef.current.reset();
 						socket.emit("send:all:notice", "");
 					}}

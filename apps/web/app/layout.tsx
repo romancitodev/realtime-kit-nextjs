@@ -4,7 +4,6 @@ import { SocketProvider } from "@/context/socket";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Handler } from "@/components/helpers/handler";
-import { ChangeTheme } from "@/components/theme/theme";
 import { ThemeProvider } from "next-themes";
 import { cn } from "@repo/atoms/utils";
 
@@ -28,7 +27,6 @@ export default function RootLayout({
 				<ThemeProvider attribute="class" defaultTheme="dark" storageKey="theme">
 					<SocketProvider>
 						<Handler />
-						<ChangeTheme />
 						{children}
 					</SocketProvider>
 				</ThemeProvider>

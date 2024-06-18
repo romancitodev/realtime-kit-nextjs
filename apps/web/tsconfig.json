@@ -2,6 +2,7 @@
 	"extends": "@repo/typescript-config/tsconfig.next.json",
 	"compilerOptions": {
 		"allowJs": true,
+		"module": "esnext",
 		"plugins": [
 			{
 				"name": "next"
@@ -18,7 +19,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"socket.js"
+		"socket.js",
+		"auth.ts"
 	],
 	"exclude": ["node_modules"]
 }

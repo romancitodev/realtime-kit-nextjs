@@ -1,15 +1,16 @@
-import { createClient } from "edgedb";
-export { default as e } from "./dbschema/edgeql-js";
-import createAuth from "@edgedb/auth-nextjs/app";
+import { config } from "dotenv";
+import { drizzle } from "drizzle-orm/libsql";
+import { createClient } from "@libsql/client";
+import * as schema from "./schemas";
+export * as f from "drizzle-orm";
+
+config({ path: ".env" });
 
 export const client = createClient({
-	instanceName: "repo-db",
-	tlsSecurity: "insecure",
-}).withGlobals({
-	"ext::auth::AuthConfig::auth_signing_key": process.env.auth_signin_key,
+	url: process.env.TURSO_CONNECTION_URL,
+	authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-export const auth = createAuth(client, {
-	baseUrl: "http://localhost:3000",
-	passwordResetPath: "/reset-password",
+export const db = drizzle(client, {
+	schema,
 });
