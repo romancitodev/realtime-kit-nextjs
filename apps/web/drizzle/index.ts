@@ -1,6 +1,5 @@
 // apps/web/src/lib/drizzle.ts
 
-import "dotenv/config";
 import { drizzle, f } from "@repo/db";
 import * as schema from "@repo/db/schema";
 import { createClient } from "@libsql/client";

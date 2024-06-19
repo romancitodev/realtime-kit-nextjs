@@ -12,13 +12,13 @@ export function Socket() {
 	if (!ready) return <main>Loading client...</main>;
 
 	return (
-		<main>
+		<main className="dark:text-white">
 			hello {socket.id}
 			<br />
 			Messages:
-			<li>
+			<li className="dark:text-white">
 				{messages.map(({ content, id }) => (
-					<ul key={id}>{content}</ul>
+					<ul key={id}>{`> ${content}`}</ul>
 				))}
 			</li>
 		</main>

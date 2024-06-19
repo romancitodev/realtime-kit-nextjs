@@ -14,17 +14,16 @@ import {
 	Form as _Form,
 } from "@repo/atoms/form";
 
-import { register } from "@/actions/auth";
-import { Register, type RegisterSchema } from "@/actions/types";
+import { login } from "@/actions/auth";
+import { Login, type LoginSchema } from "@/actions/types";
 import { Input } from "@repo/atoms/input";
 import { useState, useTransition } from "react";
 
 export function Form() {
 	// 1. Define your form.
-	const form = useForm<RegisterSchema>({
-		resolver: zodResolver(Register),
+	const form = useForm<LoginSchema>({
+		resolver: zodResolver(Login),
 		defaultValues: {
-			user: "",
 			email: "",
 			password: "",
 		},
@@ -33,10 +32,10 @@ export function Form() {
 	const [pending, startTransition] = useTransition();
 
 	// 2. Define a submit handler.
-	function onSubmit(data: RegisterSchema) {
+	function onSubmit(data: LoginSchema) {
 		startTransition(() => {
-			register(data)
-				.then((res) => setStatus(res.status))
+			login(data)
+				.then((res) => setStatus(res?.status || 600))
 				.catch(console.error);
 		});
 	}
@@ -45,34 +44,14 @@ export function Form() {
 		<_Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="w-full grid gap-y-5"
+				className="space-y-6 w-full grid gap-y-5"
 			>
-				<FormField
-					control={form.control}
-					name="user"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Name</FormLabel>
-							<FormControl>
-								<Input
-									autoComplete="username"
-									placeholder="Jhon doe"
-									{...field}
-								/>
-							</FormControl>
-							<FormDescription>
-								This is your public display name.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
 				<FormField
 					control={form.control}
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel>Name</FormLabel>
 							<FormControl>
 								<Input
 									type="email"
@@ -81,9 +60,6 @@ export function Form() {
 									{...field}
 								/>
 							</FormControl>
-							<FormDescription>
-								This is your private email contact.
-							</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -102,7 +78,6 @@ export function Form() {
 									{...field}
 								/>
 							</FormControl>
-							<FormDescription>This is your private password.</FormDescription>
 							<FormMessage />
 						</FormItem>
 					)}

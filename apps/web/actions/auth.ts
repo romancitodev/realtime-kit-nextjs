@@ -1,9 +1,13 @@
 "use server";
 
 import { db, f, schema } from "@/drizzle";
-import { Register, type RegisterSchema } from "./types";
+import { Login, Register } from "./types";
+import c from "bcryptjs";
+import { signIn } from "@/auth";
+import { routes } from "@/utils/route";
+import { AuthError } from "next-auth";
 
-export async function register(rawData: RegisterSchema) {
+export async function register(rawData: unknown) {
 	const form = Register.safeParse(rawData);
 	if (!form.success) return { status: 500 };
 	const { data } = form;
@@ -24,14 +28,48 @@ export async function register(rawData: RegisterSchema) {
 
 	if (user) return { status: 400 };
 
-	const newUser = await db
-		.insert(schema.users)
-		.values({
-			email: data.email,
-			name: data.user,
-			password: data.password,
-		})
-		.returning({ id: schema.users.id });
+	const password = await c.hash(data.password, 10);
 
-	return { status: 200, data: newUser[0]?.id };
+	try {
+		const newUser = await db
+			.insert(schema.users)
+			.values({
+				email: data.email,
+				name: data.user,
+				password,
+			})
+			.returning({ id: schema.users.id });
+
+		return { status: 200, data: newUser[0]?.id };
+	} catch (err) {
+		return { status: 500, error: err };
+	}
+}
+
+export async function login(rawData: unknown) {
+	const form = Login.safeParse(rawData);
+	if (!form.success) return { status: 500 };
+	const { email, password } = form.data;
+
+	try {
+		await signIn("credentials", {
+			email,
+			password,
+			redirectTo: routes.redirect,
+		});
+		return { status: 200 };
+	} catch (error) {
+		if (error instanceof AuthError) {
+			console.log(error.message);
+			switch (error.type) {
+				case "CredentialsSignin":
+					return { status: 501, data: "Invalid Credentials" };
+				default: {
+					return { status: 502, data: "Uknown error..." };
+				}
+			}
+		}
+		console.log(error);
+		return { status: 503 };
+	}
 }

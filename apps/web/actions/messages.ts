@@ -1,8 +1,9 @@
 "use server";
-import type { Socket } from "@/utils/socket";
+import { Message, type MessageSchema } from "@/actions/types";
 
-export const send = async (data: FormData, socket: Socket) => {
-	const message = data.get("message") as string;
-	socket.emit("send:all:message", message);
-	return { content: message, id: Date.now() };
+export const send = async (data: MessageSchema) => {
+	const form = Message.safeParse(data);
+	if (!form.success) return;
+	const { content } = form.data;
+	return { content, id: Date.now() };
 };
