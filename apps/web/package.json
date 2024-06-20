@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "NODE_ENV=production tsx server.ts"
+		"start": "next start"
 	},
 	"dependencies": {
 		"@auth/drizzle-adapter": "^1.2.0",

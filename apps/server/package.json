@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.ts",
 	"scripts": {
-		"dev": "tsx watch --clear-screen=false index.ts"
+		"dev": "tsx watch --clear-screen=false index.ts",
+		"start": "tsx watch --clear-screen=false index.ts"
 	},
 	"keywords": [],
 	"author": "",

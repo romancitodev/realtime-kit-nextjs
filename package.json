@@ -4,7 +4,8 @@
 	"scripts": {
 		"build": "turbo build",
 		"dev": "turbo dev",
-		"lint": "turbo lint"
+		"lint": "turbo lint",
+		"prod": "turbo start"
 	},
 	"devDependencies": {
 		"@repo/biome-config": "workspace:*",
