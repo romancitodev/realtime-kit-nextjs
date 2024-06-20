@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  color: black;
+}
+
+.titleBrand {
+  font-size: 1.5rem;
+}
+.navUl {
+  display: flex;
+}
+
+@media (prefers-color-scheme: dark) {
+  .header {
+    color: white;
+  }
+}
