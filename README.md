@@ -65,9 +65,7 @@ To develop all apps and packages, run the following command:
 
 > [!IMPORTANT]
 > Before running the `dev` command, please visit the [set up](CONFIGURING.md) guide.
-> ```
-> pnpm prisma generate
-> ```
+
 
 ```
 cd realtime-kit-nextjs
