@@ -58,6 +58,22 @@ This monorepo has some additional tools already setup for you:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking.
 - [Biome](https://biomejs.dev/) for code linting and formatting.
 
+### 💻 Develop
+
+To develop all apps and packages, run the following command:
+
+
+> [!IMPORTANT]
+> Before running the `dev` command, please visit the [set up](CONFIGURING.md) guide.
+> ```
+> pnpm prisma generate
+> ```
+
+```
+cd realtime-kit-nextjs
+pnpm dev
+```
+
 ### 🔨 Build
 
 To build all apps and packages, run the following command:
@@ -67,14 +83,6 @@ cd realtime-kit-nextjs
 pnpm build
 ```
 
-### 💻 Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd realtime-kit-nextjs
-pnpm dev
-```
 
 [apps/web]: /apps/web
 [apps/server]: /apps/server
