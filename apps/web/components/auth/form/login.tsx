@@ -28,15 +28,13 @@ export function Form() {
 			password: "",
 		},
 	});
-	const [status, setStatus] = useState<number>();
+	const [status, setStatus] = useState<string>();
 	const [pending, startTransition] = useTransition();
 
 	// 2. Define a submit handler.
 	function onSubmit(data: LoginSchema) {
 		startTransition(() => {
-			login(data)
-				.then((res) => setStatus(res?.status || 600))
-				.catch(console.error);
+			login(data).then((res) => setStatus(res?.data || "Unknown"));
 		});
 	}
 
@@ -85,7 +83,7 @@ export function Form() {
 				<Button type="submit" disabled={pending}>
 					Submit
 				</Button>
-				{status && <pre>{status}</pre>}
+				{status && <pre className="dark:text-white">{status}</pre>}
 			</form>
 		</_Form>
 	);

@@ -6,6 +6,7 @@ import c from "bcryptjs";
 import { signIn } from "@/auth";
 import { routes } from "@/utils/route";
 import { AuthError } from "next-auth";
+import { isRedirectError } from "next/dist/client/components/redirect";
 
 export async function register(rawData: unknown) {
 	const form = Register.safeParse(rawData);
@@ -57,19 +58,20 @@ export async function login(rawData: unknown) {
 			password,
 			redirectTo: routes.redirect,
 		});
-		return { status: 200 };
+		return { status: 200, data: null };
 	} catch (error) {
+		if (isRedirectError(error)) throw error;
 		if (error instanceof AuthError) {
-			console.log(error.message);
 			switch (error.type) {
+				case "CallbackRouteError":
 				case "CredentialsSignin":
-					return { status: 501, data: "Invalid Credentials" };
-				default: {
+					return {
+						status: 501,
+						data: error.cause?.err?.toString() ?? "Unknown Error",
+					};
+				default:
 					return { status: 502, data: "Uknown error..." };
-				}
 			}
 		}
-		console.log(error);
-		return { status: 503 };
 	}
 }

@@ -13,10 +13,12 @@ export default {
 
 				const { email, password } = credentials.data;
 				const [user] = await getUsernameByEmail(email);
-				if (!user || !user.password) return null;
+				if (!user || !user.password)
+					throw new Error("Email or password incorrect.");
 
 				const match = await c.compare(password, user.password);
-				return match ? user : null;
+				if (!match) throw new Error("Email or password incorrect.");
+				return user;
 			},
 		}),
 	],
