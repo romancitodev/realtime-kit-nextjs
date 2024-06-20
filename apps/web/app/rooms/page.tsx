@@ -19,7 +19,9 @@ export default function Page() {
 
 	return (
 		<article className="w-full h-full flex flex-col gap-y-5 items-center justify-center">
-			<h1 className="text-foreground dark:text-foreground">Projectfy</h1>
+			<h1 className="text-foreground dark:text-white">
+				Chat room 100% Real no fake
+			</h1>
 			<div className="w-96 grid grid-cols-1 grid-rows-1 gap-6 items-start">
 				<Form onInput={handleInput} />
 				<section className="h-48 overflow-y-auto border-[1px] border-gray-300 bg-gray-50 dark:border-gray-300/25 dark:bg-neutral-950 dark:text-gray-100 rounded-md p-2 w-full">

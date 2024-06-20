@@ -4,6 +4,7 @@ import { useTheme } from "next-themes";
 import { Button } from "@repo/atoms/button";
 import { useState } from "react";
 import { oneShot } from "@/hooks/on-client";
+import { SunMedium, Moon } from "lucide-react";
 
 export const ChangeTheme = () => {
 	const { theme, setTheme } = useTheme();
@@ -17,6 +18,8 @@ export const ChangeTheme = () => {
 	const newTheme = theme === "dark" ? "light" : "dark";
 
 	return (
-		<Button onClick={() => handleClick(newTheme)}>Switch to {newTheme}</Button>
+		<Button size="icon" onClick={() => handleClick(newTheme)}>
+			{theme === "light" ? <Moon /> : <SunMedium />}
+		</Button>
 	);
 };

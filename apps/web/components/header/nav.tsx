@@ -1,38 +1,36 @@
 import { auth, signOut } from "@/auth";
-import styles from "./nav.module.css";
 import Link from "next/link";
+import { Button } from "@repo/atoms/button";
+import { ChangeTheme } from "@/components/theme/theme";
 
 export async function Nav() {
-  const session = await auth();
+	const session = await auth();
 
-  const handleSubmit = async () => {
-    "use server";
-    await signOut();
-  };
+	const handleSubmit = async () => {
+		"use server";
+		await signOut();
+	};
 
-  return (
-    <header className={styles.header}>
-      <h2 className={styles.titleBrand}>Acme.com</h2>
-      <nav>
-        <ul className={styles.navUl}>
-          {session && session.user ? (
-            <li>
-              <form action={handleSubmit}>
-                <button type="submit">Sign out</button>
-              </form>
-            </li>
-          ) : (
-            <>
-              <li>
-                <Link href="/login">Login</Link>
-              </li>
-              <li>
-                <Link href="/register">Register</Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-    </header>
-  );
+	return (
+		<header className="flex w-full justify-between dark:text-white">
+			<h2 className="w-full text-2xl items-center">Acme.com</h2>
+			<nav className="flex w-max gap-2">
+				{session?.user ? (
+					<form action={handleSubmit}>
+						<Button type="submit">Sign out</Button>
+					</form>
+				) : (
+					<>
+						<Link href="/login">
+							<Button>Login</Button>
+						</Link>
+						<Link href="/register">
+							<Button variant="outline">Register</Button>
+						</Link>
+					</>
+				)}
+				<ChangeTheme />
+			</nav>
+		</header>
+	);
 }

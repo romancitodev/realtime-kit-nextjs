@@ -52,7 +52,7 @@ export function Form() {
 					name="user"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Name</FormLabel>
+							<FormLabel className="dark:text-gray-50">Name</FormLabel>
 							<FormControl>
 								<Input
 									autoComplete="username"
@@ -72,7 +72,7 @@ export function Form() {
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Email</FormLabel>
+							<FormLabel className="dark:text-gray-50">Email</FormLabel>
 							<FormControl>
 								<Input
 									type="email"
@@ -93,7 +93,7 @@ export function Form() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel className="dark:text-gray-50">Password</FormLabel>
 							<FormControl>
 								<Input
 									type="password"

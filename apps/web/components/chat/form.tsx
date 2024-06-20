@@ -75,7 +75,12 @@ export function Form({ onInput }: FormProps) {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={pending} variant="outline">
+				<Button
+					type="submit"
+					disabled={pending}
+					variant="outline"
+					className="dark:text-gray-50"
+				>
 					Send message
 				</Button>
 			</form>

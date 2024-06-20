@@ -5,7 +5,7 @@ import ui from "@repo/atoms/tailwind.config.ts";
 
 const config: Pick<Config, "content" | "presets" | "darkMode"> = {
 	darkMode: "class",
-	content: ["./app/**/*.tsx"],
+	content: ["./app/**/*.tsx", "./components/**/*.tsx"],
 	presets: [ui],
 };
 

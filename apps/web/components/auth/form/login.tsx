@@ -42,14 +42,14 @@ export function Form() {
 		<_Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="space-y-6 w-full grid gap-y-5"
+				className="space-y-6 w-full flex flex-col"
 			>
 				<FormField
 					control={form.control}
 					name="email"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Name</FormLabel>
+							<FormLabel className="dark:text-gray-50">Name</FormLabel>
 							<FormControl>
 								<Input
 									type="email"
@@ -67,7 +67,7 @@ export function Form() {
 					name="password"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Password</FormLabel>
+							<FormLabel className="dark:text-gray-50">Password</FormLabel>
 							<FormControl>
 								<Input
 									type="password"

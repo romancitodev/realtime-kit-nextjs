@@ -13,6 +13,7 @@
 		"@hookform/resolvers": "^3.6.0",
 		"@libsql/client": "^0.6.2",
 		"@repo/atoms": "workspace:*",
+		"lucide-react": "^0.395.0",
 		"next": "^14.2.0",
 		"next-auth": "5.0.0-beta.19",
 		"next-themes": "^0.3.0",

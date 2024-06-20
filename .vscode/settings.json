@@ -1,3 +1,4 @@
 {
-	"biome.lspBin": "../packages/biome-config/node_modules/@biomejs/cli-win32-x64/biome.exe"
+	"biome.lspBin": "../packages/biome-config/node_modules/@biomejs/cli-win32-x64/biome.exe",
+	"conventionalCommits.scopes": ["web"]
 }
