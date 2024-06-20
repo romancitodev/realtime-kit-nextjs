@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { Handler } from "@/components/helpers/handler";
 import { ThemeProvider } from "next-themes";
 import { cn } from "@repo/atoms/utils";
+import { Nav } from "@/components/header/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
 				<ThemeProvider attribute="class" defaultTheme="dark" storageKey="theme">
 					<SocketProvider>
 						<Handler />
+						<Nav />
 						{children}
 					</SocketProvider>
 				</ThemeProvider>
