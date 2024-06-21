@@ -10,7 +10,8 @@
 	"devDependencies": {
 		"@repo/biome-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
-		"turbo": "latest"
+		"turbo": "latest",
+		"next": "^14.2.4"
 	},
 	"packageManager": "pnpm@9.1.2"
 }
