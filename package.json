@@ -8,7 +8,6 @@
 		"prod": "turbo start"
 	},
 	"devDependencies": {
-		"@repo/db": "workspace:*",
 		"@repo/atoms": "workspace:*",
 		"@repo/biome-config": "workspace:*",
 		"@repo/typescript-config": "workspace:*",
