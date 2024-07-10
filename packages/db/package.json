@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"db:generate": "pnpm drizzle-kit generate"
+		"db:generate": "pnpm drizzle-kit generate && pnpm drizzle-kit migrate"
 	},
 	"keywords": [],
 	"author": "",

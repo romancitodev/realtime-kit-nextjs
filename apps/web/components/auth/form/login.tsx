@@ -41,7 +41,6 @@ export function Form() {
 	return (
 		<_Form {...form}>
 			<form
-				onSubmit={form.handleSubmit(onSubmit)}
 				className="space-y-6 w-full flex flex-col"
 			>
 				<FormField
@@ -80,7 +79,7 @@ export function Form() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" disabled={pending}>
+				<Button type="submit" disabled={pending} onClick={form.handleSubmit(onSubmit)}>
 					Submit
 				</Button>
 				{status && <pre className="dark:text-white">{status}</pre>}
